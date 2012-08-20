@@ -29,8 +29,6 @@ def choose_meal
    end
  end
 
- 
-
   puts "Which number meal would you like?"
   meal_choice = (gets.chomp.to_i) - 1
 
@@ -38,29 +36,34 @@ def choose_meal
     extra_value_menu[meal_choice].each do |k,v|
     puts "You've chosen the #{k} meal. What would you like to drink (Coke/Sprite/Dr.Pepper)?"
     drink_choice = get_user_command.capitalize
-    # if drink_choice != "coke" || "sprite" || "dr. pepper"
-    #   puts "sorry, that's not one of the options"
-    # else
-    puts "#{drink_choice}, good pick! Would you like to super-size that?(Y/N)"
-    supersize = get_user_command
-    if supersize == "y"
-      extra_value_menu[meal_choice].each do |k,v|
-        x = v*1.5
-      puts "Great! Your supersized #{k} meal with a #{drink_choice} costs $#{x}"
-    end
-    else 
-      puts "something"
+    
+    # case drink_choice
+    #   when   "coke" || "sprite" || "dr. pepper"
+        puts "#{drink_choice}, good pick! Would you like to super-size that?(Y/N)"
+        supersize = get_user_command
+      
+      case supersize
+      when  "y"
+          extra_value_menu[meal_choice].each do |k,v|
+          supersizeprice = v*1.5
+          puts "Great! Your supersized #{k} meal with a #{drink_choice} costs $#{supersizeprice}"
+        end
+      when  "n" 
+          extra_value_menu[meal_choice].each do |k,v|
+          regprice = v
+          puts "Ok! Your #{k} meal with a #{drink_choice} costs $#{regprice}"
+        end
+      else
+        puts "something"
+      end
     end
 
-# end
-  end
   else
     puts "that's not on the menu, try again"
     sleep 1
   end
-
-
 end
+
 
 
 puts "Welcome to Macdonalds drive-thru, would you like to see our Extra Value Menu?(Y/N or 'Quit' to exit)"
@@ -83,5 +86,7 @@ while input != "quit"
   end
 end
 
-#this is a comment
+
+
+#this is a comment  
 
