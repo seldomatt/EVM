@@ -117,6 +117,9 @@ end
 
 #this is a change
 
+def newmethod
+end
+
 
 
 #this is a comment  
