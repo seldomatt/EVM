@@ -1,52 +1,27 @@
+require './outputter'
+
 class Orders
 
-	attr_accessor :mealnum, :drink, :name, :price
+	attr_accessor :mealnum, :drink, :name, :price, :supersized
 
 	def initialize(m,n,p)
 		@mealnum = m
 		@drink = "None"
 		@name = n
 		@price = p
+		@supersized = false
 	end
 
 	def supersize
 		@price= @price * 1.5
+		@supersized= true
+	end
+
+	def supersized?
+		@supersized
 	end
 
 end
-
-class Outputter
-
-	def self.welcome_message
-		puts "Welcome to McDonald's.  Type 'driveup' to see our menu!"
-	end
-
-	def self.no_command_error
-		puts "Sorry, didn't understand that command"
-	end
-
-	def self.meal_choice_prompt
-		puts "Which meal would you like? (type '1', '2', etc.)"
-	end
-
-	def self.no_choice_error
-		puts "Sorry, that's not a choice, please try again"
-	end
-
-	def self.meal_choice_confirm(order)
-		puts "A #{order.name} meal, great choice!"
-	end
-
-	def self.drink_choice_prompt(order)
-		puts "What kind of drink would you like with your #{order.name}"
-	end
-
-	def self.drink_choice_confirm(order)
-		puts "Ok, so that's a #{order.name} meal with a #{order.drink}"
-	end
-
-end
-
 
 class DriveThru 
 
@@ -118,7 +93,30 @@ class DriveThru
 	end
 
 	def supersize(order)
+		Outputter.super_size_prompt(order)
+
+		supersizechoice = gets.strip.downcase
+
+		if supersizechoice == 'y' || supersizechoice == 'yes' 
+			order.supersize 
+			puts order.inspect
+			payment(order)
+		elsif  supersizechoice == 'n' || supersizechoice == 'no' 
+			payment(order)
+		else 
+			Outputter.no_command_error
+		end
+
 	end 
+
+	def payment(order)
+		Outputter.prepayment_readback(order)
+
+
+
+
+	end
+
 
 
 
