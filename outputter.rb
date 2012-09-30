@@ -1,7 +1,7 @@
 class Outputter
 
 	def self.welcome_message
-		puts "Welcome to McDonald's.  Type 'driveup' to see our menu!"
+		puts "Welcome to McDonald's.  Type 'driveup' to see our menu or 'quit' to leave!"
 	end
 
 	def self.no_command_error
@@ -34,9 +34,9 @@ class Outputter
 
 	def self.prepayment_readback(order)
 		if order.supersized?
-			puts "Ok, that's one supersized #{order.name} meal with a #{order.drink}.  You're total is #{order.price}"
+			puts "Ok, that's one supersized #{order.name} meal with a #{order.drink}.  You're total is #{order.price}, please enter your payment:"
 		else 
-			puts "Ok, that's one #{order.name} meal with a #{order.drink}.  You're total is #{order.price}"
+			puts "Ok, that's one #{order.name} meal with a #{order.drink}.  You're total is #{order.price}, please enter your payment:"
 		end
 	end
 
